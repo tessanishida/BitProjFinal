@@ -3,8 +3,6 @@ const accountSid = "AC85330b72efc3e7ac43bee9603a4580fd";
 const authToken = "905c8ac3b226add611817b6a475b88e6";
 const client = require('twilio')(accountSid, authToken);
 
-// fetch
-
 module.exports = async function (context) {
     context.log('JavaScript HTTP trigger function processed a request.');
 

@@ -7,6 +7,6 @@
     "test": "echo \"No tests yet...\"",
     "build": ""
   },
-  "dependencies": {},
+  "dependencies": {"twilio": "^3.57.0"},
   "devDependencies": {}
 }
