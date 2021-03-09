@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chathura&display=swap" rel="stylesheet">
+    <title>Timer</title>
+</head>
+<body>
+    <!--add a navbar?-->
+    <div class="header">
+        <h1>Let's build Saturn's rings!</h1>
+    </div>
+    <div class="flex-container">
+        <!--make the ring responsive?-->>
+        <div id="inner-circle">
+            <div id="time"></div>
+        </div>
+        <img src="alien.png" id="alien-img">
+        <button id="start-btn">START</button>
+    </div>
+    <!--submit button?-->
+    <form id="contact-form">
+        <h3>Parent Contact Information</h3>
+        <input type="text" id="contact-name" placeholder="Name" autocomplete="off">
+        <input type="text" id="contact-number" placeholder="Phone Number" autocomplete="off">
+    </form>
+    <button id="form-submit-btn" onclick="submitForm()">Submit!</button> 
+    <script src='timer.js'></script>
+</body>
+</html>

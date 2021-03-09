@@ -1,0 +1,157 @@
+// Tessa Nishida
+// Adapted from https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
+
+function CountDownTimer(duration, granularity, message) {
+    this.duration = duration;
+    this.granularity = granularity || 1000;
+    this.tickFtns = [];
+    this.running = false;
+    this.message = message;
+    }
+  
+  CountDownTimer.prototype.start = function() {
+    if (this.running) {
+      return;
+    }
+    this.running = true;
+    var start = Date.now(),
+        that = this,
+        diff, obj;
+  
+    (function timer() {
+      diff = that.duration - (((Date.now() - start) / 1000) | 0);
+  
+      if (diff > 0) {
+        setTimeout(timer, that.granularity);
+      } else {
+        diff = 0;
+        that.running = false;
+      }
+  
+      obj = CountDownTimer.parse(diff);
+      that.tickFtns.forEach(function(ftn) {
+        ftn.call(this, obj.minutes, obj.seconds);
+      }, that);
+    }());
+  };
+  
+  CountDownTimer.prototype.onTick = function(ftn) {
+    if (typeof ftn === 'function') {
+      this.tickFtns.push(ftn);
+    }
+    return this;
+  };
+  
+  CountDownTimer.prototype.expired = function() {
+    return !this.running;
+  };
+  
+  CountDownTimer.prototype.getMessage = function() {
+    return this.message;
+  };
+
+  CountDownTimer.parse = function(seconds) {
+    return {
+      'minutes': (seconds / 60) | 0,
+      'seconds': (seconds % 60) | 0
+    };
+  };
+
+window.onload = function () {
+    // make multiple timers
+    var display = document.getElementById("time"),
+        timer = new CountDownTimer(5, null, "Time to take a break!"),
+        timeObj = CountDownTimer.parse(5);
+        work = true;
+
+    format(timeObj.minutes, timeObj.seconds);
+    
+    timer.onTick(format).onTick(finish);
+
+    document.getElementById("start-btn").addEventListener('click', function () {
+        timer.start();
+    });
+    
+    function format(minutes, seconds) {
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ':' + seconds;
+    }
+
+    function finish() {
+        var message = this.getMessage();
+        if (this.expired()) {
+            setTimeout (function () { window.alert(message); reset(); }, 1000);
+        }
+    }
+
+    function reset() {
+        if(work) {
+            timer = new CountDownTimer(3),
+            timeObj = CountDownTimer.parse(3);
+            work = false;
+            format(timeObj.minutes, timeObj.seconds);
+        } else {
+            timer = new CountDownTimer(5),
+            timeObj = CountDownTimer.parse(5);
+            work = true;
+            format(timeObj.minutes, timeObj.seconds);
+        }
+    }
+};
+
+function reset() {
+  if(work) {
+    timer = new CountDownTimer(3),
+    timeObj = CountDownTimer.parse(3);
+    work = false;
+    format(timeObj.minutes, timeObj.seconds);
+  } else {
+    timer = new CountDownTimer(5),
+    timeObj = CountDownTimer.parse(5);
+    work = true;
+    format(timeObj.minutes, timeObj.seconds);
+  }
+}
+
+var contactNum;
+var contactName;
+
+// handle form submission
+function submitForm() {
+  contactName = document.getElementById("contact-name").value;
+  contactNum = document.getElementById("contact-number").value;
+  console.log(contactName + ":" + contactNum);
+  sendSummary();
+}
+
+// handle window closing
+window.addEventListener('beforeunload', function (e) { 
+  e.preventDefault();
+  e.returnValue = '';
+}); 
+
+window.addEventListener('unload', function (e) { 
+  sendSummary();
+}); 
+
+async function sendSummary() {
+  // call to Azure function
+  await fetch("/api/ExitSummary");
+  console.log("summary sent!");
+};
+
+// function sendMessage() {
+//   const accountSid = "AC85330b72efc3e7ac43bee9603a4580fd";
+//   const authToken = "905c8ac3b226add611817b6a475b88e6";
+//   const client = require('twilio')(accountSid, authToken);
+
+//   client.messages
+//       .create({
+//          body: 'Text message from the timer!',
+//          from: '+17327163516',
+//          to: '+18082202539'
+//        })
+//       .then(message => console.log(message.sid));
+// };
+
