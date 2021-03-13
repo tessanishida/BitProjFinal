@@ -100,20 +100,6 @@ window.onload = function () {
     }
 };
 
-function reset() {
-  if(work) {
-    timer = new CountDownTimer(3),
-    timeObj = CountDownTimer.parse(3);
-    work = false;
-    format(timeObj.minutes, timeObj.seconds);
-  } else {
-    timer = new CountDownTimer(5),
-    timeObj = CountDownTimer.parse(5);
-    work = true;
-    format(timeObj.minutes, timeObj.seconds);
-  }
-}
-
 var contactNum;
 var contactName;
 
@@ -140,18 +126,4 @@ async function sendSummary() {
   await fetch("/api/ExitSummary");
   console.log("summary sent!");
 };
-
-// function sendMessage() {
-//   const accountSid = "AC85330b72efc3e7ac43bee9603a4580fd";
-//   const authToken = "905c8ac3b226add611817b6a475b88e6";
-//   const client = require('twilio')(accountSid, authToken);
-
-//   client.messages
-//       .create({
-//          body: 'Text message from the timer!',
-//          from: '+17327163516',
-//          to: '+18082202539'
-//        })
-//       .then(message => console.log(message.sid));
-// };
 
