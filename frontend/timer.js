@@ -7,7 +7,7 @@ function CountDownTimer(duration, granularity, message) {
     this.tickFtns = [];
     this.running = false;
     this.message = message;
-    }
+}
   
   CountDownTimer.prototype.start = function() {
     if (this.running) {
@@ -57,13 +57,13 @@ function CountDownTimer(duration, granularity, message) {
     };
   };
 
-var workRuns = 0;
 
-window.onload = function () {
   var display = document.getElementById("time");
   var timer = new CountDownTimer(20, null, "Time to take a break!");
   var timeObj = CountDownTimer.parse(20);
   var work = true;
+  var minutesWorked = 0;
+
   format(timeObj.minutes, timeObj.seconds);
   timer.onTick(format).onTick(finish);
 
@@ -86,13 +86,13 @@ window.onload = function () {
 
   function reset() {
       if(work) {
-        workRuns++;
+          minutesWorked += timer.duration; // last work timer durration
           timer = new CountDownTimer(5, null, "Let's get back to work!"),
           timeObj = CountDownTimer.parse(5);
           work = false;
           format(timeObj.minutes, timeObj.seconds);
           timer.onTick(format).onTick(finish);
-          console.log(workRuns);
+          console.log(minutesWorked);
       } else {
           timer = new CountDownTimer(20, null, "Time to take a break!"),
           timeObj = CountDownTimer.parse(20);
@@ -101,11 +101,8 @@ window.onload = function () {
           timer.onTick(format).onTick(finish);
       }
   } 
-};
-
 var contactNum;
 var contactName;
-var minutesWorked = 20 * workRuns;
 
 // handle form submission
 function submitForm() {
@@ -113,6 +110,7 @@ function submitForm() {
   contactNum = "+1" + document.getElementById("contact-number").value;
   console.log(contactName + ":" + contactNum);
   sendConfirmationMessage();
+  console.log(minutesWorked);
 };
 
 window.onbeforeunload = function() {
