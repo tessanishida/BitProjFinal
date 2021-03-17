@@ -106,7 +106,7 @@ var contactName;
 // handle form submission
 function submitForm() {
   contactName = document.getElementById("contact-name").value;
-  contactNum = document.getElementById("contact-number").value;
+  contactNum = "+1" + document.getElementById("contact-number").value;
   console.log(contactName + ":" + contactNum);
   sendConfirmationMessage();
 }
@@ -123,7 +123,7 @@ async function sendConfirmationMessage() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: "+1"+contactNum, messageContent: "Hi "+contactName+"! Thanks for using my web app :)"})
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Hi "+contactName+"! Thanks for using my web app :)"})
   });
   console.log("confirmation sent!");
 }
@@ -136,7 +136,7 @@ async function sendSummary() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: "+1"+contactNum, messageContent: "Hi "+contactName+"!"})
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Hi "+contactName+"!"})
   });
   console.log("summary sent!");
 };
