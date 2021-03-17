@@ -123,7 +123,14 @@ window.addEventListener('unload', function (e) {
 
 async function sendSummary() {
   // call to Azure function
-  await fetch("/api/ExitSummary");
+  await fetch("/api/ExitSummary", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({phoneNumber: "+1"+contactNum, messageContent: "hi"+contactName })
+  });
   console.log("summary sent!");
 };
 

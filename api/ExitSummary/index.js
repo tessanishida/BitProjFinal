@@ -3,14 +3,15 @@ const accountSid = "AC85330b72efc3e7ac43bee9603a4580fd";
 const authToken = "40e6c7a10ce33f4c30e1b3bced35539d";
 const client = require('twilio')(accountSid, authToken);
 
-module.exports = async function (context) {
+module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    let response = await client.messages
+    if (req.body && req.body.phoneNumber) {
+      let response = await client.messages
       .create({
-         body: 'Text message from the timer!',
+         body: req.body.message,
          from: '+17327163516',
-         to: '+18082202539'
+         to: req.body.phoneNumber
        })
       .then(message => console.log(message.sid));
 
@@ -18,4 +19,11 @@ module.exports = async function (context) {
         // status: 200, /* Defaults to 200 */
         body: response
       };
+    }
+    else {
+      context.res = {
+          status: 400,
+          body: "Please pass a name on the query string or in the request body"
+      };
+    }
 }
