@@ -110,16 +110,12 @@ function submitForm() {
   contactNum = "+1" + document.getElementById("contact-number").value;
   console.log(contactName + ":" + contactNum);
   sendConfirmationMessage();
-  sendSummary();
 };
 
 window.addEventListener('beforeunload', function (e) {
-  e.returnValue = 'Are you done working?';
+  e.returnValue = 'Remember to end session before leaving!';
 });
 
-window.addEventListener('unload', function (e) {
-  sendSummary();
-});
 
 
 async function sendConfirmationMessage() {
