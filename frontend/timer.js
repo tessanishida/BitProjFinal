@@ -75,14 +75,14 @@ function CountDownTimer(duration, granularity, message) {
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       display.textContent = minutes + ':' + seconds;
-  }
+  };
 
   function finish() {
       var message = this.getMessage();
       if (this.expired()) {
           setTimeout (function () { window.alert(message); reset(); }, 1000);
       }
-  }
+  };
 
   function reset() {
       if(work) {
@@ -92,7 +92,6 @@ function CountDownTimer(duration, granularity, message) {
           work = false;
           format(timeObj.minutes, timeObj.seconds);
           timer.onTick(format).onTick(finish);
-          console.log(minutesWorked);
       } else {
           timer = new CountDownTimer(20, null, "Time to take a break!"),
           timeObj = CountDownTimer.parse(20);
@@ -100,7 +99,8 @@ function CountDownTimer(duration, granularity, message) {
           format(timeObj.minutes, timeObj.seconds);
           timer.onTick(format).onTick(finish);
       }
-  } 
+  };
+
 var contactNum;
 var contactName;
 
@@ -110,12 +110,14 @@ function submitForm() {
   contactNum = "+1" + document.getElementById("contact-number").value;
   console.log(contactName + ":" + contactNum);
   sendConfirmationMessage();
-  console.log(minutesWorked);
+  sendSummary();
 };
 
 window.onbeforeunload = function() {
+  console.log(minutesWorked);
   sendSummary();
-}
+};
+
 async function sendConfirmationMessage() {
   await fetch("/api/ExitSummary", {
     method: 'POST',
