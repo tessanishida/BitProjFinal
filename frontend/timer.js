@@ -109,12 +109,11 @@ function submitForm() {
   contactNum = "+1" + document.getElementById("contact-number").value;
   console.log(contactName + ":" + contactNum);
   sendConfirmationMessage();
-}
+};
 
-// handle window closing
-window.addEventListener('beforeunload', function (e) { 
-  sendSummary();
-}); 
+window.onbeforeunload = function(event) {
+  event.sendSummary();
+};
 
 async function sendConfirmationMessage() {
   await fetch("/api/ExitSummary", {
@@ -126,7 +125,7 @@ async function sendConfirmationMessage() {
     body: JSON.stringify({phoneNumber: contactNum, messageContent: "Hi "+contactName+"! Thanks for using my web app :)"})
   });
   console.log("confirmation sent!");
-}
+};
 
 async function sendSummary() {
   // call to Azure function
