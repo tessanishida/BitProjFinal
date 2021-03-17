@@ -127,7 +127,6 @@ async function sendConfirmationMessage() {
     },
     body: JSON.stringify({phoneNumber: contactNum, messageContent: "Thanks for using my web app :)"})
   });
-  console.log("confirmation sent!");
 };
 
 async function sendSummary() {
@@ -140,6 +139,5 @@ async function sendSummary() {
     },
     body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName+" completed "+minutesWorked+" minutes of work!"})
   });
-  console.log("summary sent!");
 };
 
