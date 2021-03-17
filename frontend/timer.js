@@ -129,7 +129,7 @@ async function sendSummary() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: "+1"+contactNum, messageContent: "hi"+contactName })
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName })
   });
   console.log("summary sent!");
 };
