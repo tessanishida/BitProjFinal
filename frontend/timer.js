@@ -114,8 +114,8 @@ function submitForm() {
 };
 
 window.addEventListener('beforeunload', function (e) {
+  e.returnValue = 'Are you done working?';
   sendSummary();
-  e.returnValue = '';
 });
 
 async function sendConfirmationMessage() {
