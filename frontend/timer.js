@@ -105,6 +105,7 @@ window.onload = function () {
 
 var contactNum;
 var contactName;
+var minutesWorked = 20 * workRuns;
 
 // handle form submission
 function submitForm() {
@@ -137,7 +138,7 @@ async function sendSummary() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName+" completed "+20*workRuns+" minutes of work!"})
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName+" completed "+minutesWorked+" minutes of work!"})
   });
   console.log("summary sent!");
 };
