@@ -57,6 +57,8 @@ function CountDownTimer(duration, granularity, message) {
     };
   };
 
+  var workRuns = 0;
+
 window.onload = function () {
     // make multiple timers
     var display = document.getElementById("time"),
@@ -91,6 +93,7 @@ window.onload = function () {
             timeObj = CountDownTimer.parse(3);
             work = false;
             format(timeObj.minutes, timeObj.seconds);
+            workRuns++;
         } else {
             timer = new CountDownTimer(5),
             timeObj = CountDownTimer.parse(5);
@@ -121,7 +124,7 @@ async function sendConfirmationMessage() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Hi "+contactName+"! Thanks for using my web app :)"})
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Thanks for using my web app :)"})
   });
   console.log("confirmation sent!");
 };
@@ -134,7 +137,7 @@ async function sendSummary() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Hi "+contactName+"!"})
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName+" completed "+20*workRuns+" minutes of work!"})
   });
   console.log("summary sent!");
 };
