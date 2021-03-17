@@ -57,50 +57,50 @@ function CountDownTimer(duration, granularity, message) {
     };
   };
 
-  var workRuns = 0;
+var workRuns = 0;
 
 window.onload = function () {
-    // make multiple timers
-    var display = document.getElementById("time"),
-        timer = new CountDownTimer(5, null, "Time to take a break!"),
-        timeObj = CountDownTimer.parse(5);
-        work = true;
+  var display = document.getElementById("time");
+  var timer = new CountDownTimer(20, null, "Time to take a break!");
+  var timeObj = CountDownTimer.parse(20);
+  var work = true;
+  format(timeObj.minutes, timeObj.seconds);
+  timer.onTick(format).onTick(finish);
 
-    format(timeObj.minutes, timeObj.seconds);
-    
-    timer.onTick(format).onTick(finish);
+  document.getElementById("start-btn").addEventListener('click', function () {
+      timer.start();
+  });
+  
+  function format(minutes, seconds) {
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+      display.textContent = minutes + ':' + seconds;
+  }
 
-    document.getElementById("start-btn").addEventListener('click', function () {
-        timer.start();
-    });
-    
-    function format(minutes, seconds) {
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = minutes + ':' + seconds;
-    }
+  function finish() {
+      var message = this.getMessage();
+      if (this.expired()) {
+          setTimeout (function () { window.alert(message); reset(); }, 1000);
+      }
+  }
 
-    function finish() {
-        var message = this.getMessage();
-        if (this.expired()) {
-            setTimeout (function () { window.alert(message); reset(); }, 1000);
-        }
-    }
-
-    function reset() {
-        if(work) {
-            timer = new CountDownTimer(3),
-            timeObj = CountDownTimer.parse(3);
-            work = false;
-            format(timeObj.minutes, timeObj.seconds);
-            workRuns++;
-        } else {
-            timer = new CountDownTimer(5),
-            timeObj = CountDownTimer.parse(5);
-            work = true;
-            format(timeObj.minutes, timeObj.seconds);
-        }
-    }
+  function reset() {
+      if(work) {
+        workRuns++;
+          timer = new CountDownTimer(5, null, "Let's get back to work!"),
+          timeObj = CountDownTimer.parse(5);
+          work = false;
+          format(timeObj.minutes, timeObj.seconds);
+          timer.onTick(format).onTick(finish);
+          console.log(workRuns);
+      } else {
+          timer = new CountDownTimer(20, null, "Time to take a break!"),
+          timeObj = CountDownTimer.parse(20);
+          work = true;
+          format(timeObj.minutes, timeObj.seconds);
+          timer.onTick(format).onTick(finish);
+      }
+  } 
 };
 
 var contactNum;
