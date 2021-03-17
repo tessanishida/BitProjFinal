@@ -108,18 +108,25 @@ function submitForm() {
   contactName = document.getElementById("contact-name").value;
   contactNum = document.getElementById("contact-number").value;
   console.log(contactName + ":" + contactNum);
-  sendSummary();
+  sendConfirmationMessage();
 }
 
 // handle window closing
 window.addEventListener('beforeunload', function (e) { 
-  e.preventDefault();
-  e.returnValue = '';
-}); 
-
-window.addEventListener('unload', function (e) { 
   sendSummary();
 }); 
+
+async function sendConfirmationMessage() {
+  await fetch("/api/ExitSummary", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({phoneNumber: "+1"+contactNum, messageContent: "Hi "+contactName+"! Thanks for using my web app :)"})
+  });
+  console.log("confirmation sent!");
+}
 
 async function sendSummary() {
   // call to Azure function
@@ -129,7 +136,7 @@ async function sendSummary() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName})
+    body: JSON.stringify({phoneNumber: "+1"+contactNum, messageContent: "Hi "+contactName+"!"})
   });
   console.log("summary sent!");
 };
