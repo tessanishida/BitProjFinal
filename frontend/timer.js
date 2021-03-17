@@ -116,7 +116,7 @@ function submitForm() {
 window.onbeforeunload = function() {
   console.log(minutesWorked);
   sendSummary();
-};
+}
 
 async function sendConfirmationMessage() {
   await fetch("/api/ExitSummary", {
