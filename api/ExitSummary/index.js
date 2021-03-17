@@ -9,7 +9,7 @@ module.exports = async function (context, req) {
     if (req.body && req.body.phoneNumber) {
       let response = await client.messages
       .create({
-         body: req.body.message,
+         body: req.body.messageContent,
          from: '+17327163516',
          to: req.body.phoneNumber
        })
