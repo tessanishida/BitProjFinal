@@ -114,7 +114,6 @@ function submitForm() {
 };
 
 window.onbeforeunload = function() {
-  console.log(minutesWorked);
   sendSummary();
 }
 
