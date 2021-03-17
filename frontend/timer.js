@@ -113,9 +113,10 @@ function submitForm() {
   sendSummary();
 };
 
-window.onbeforeunload = function() {
+window.addEventListener('beforeunload', function (e) {
   sendSummary();
-}
+  e.returnValue = '';
+});
 
 async function sendConfirmationMessage() {
   await fetch("/api/ExitSummary", {
