@@ -111,10 +111,9 @@ function submitForm() {
   sendConfirmationMessage();
 };
 
-window.onbeforeunload = function(event) {
-  event.sendSummary();
-};
-
+window.onbeforeunload = function() {
+  sendSummary();
+}
 async function sendConfirmationMessage() {
   await fetch("/api/ExitSummary", {
     method: 'POST',
