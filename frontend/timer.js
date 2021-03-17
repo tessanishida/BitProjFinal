@@ -115,8 +115,12 @@ function submitForm() {
 
 window.addEventListener('beforeunload', function (e) {
   e.returnValue = 'Are you done working?';
+});
+
+window.addEventListener('unload', function (e) {
   sendSummary();
 });
+
 
 async function sendConfirmationMessage() {
   await fetch("/api/ExitSummary", {
