@@ -125,7 +125,7 @@ async function sendConfirmationMessage() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Thanks for using my web app :)"})
+    body: JSON.stringify({phoneNumber: contactNum, messageContent: "Thanks for using WorkSpace!"})
   });
 };
 
@@ -137,7 +137,10 @@ async function sendSummary() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({phoneNumber: contactNum, messageContent: contactName+" completed "+minutesWorked+" minutes of work!"})
+    body: JSON.stringify({
+      phoneNumber: contactNum, 
+      messageContent: contactName+" completed "+minutesWorked+" minutes of work!"
+    })
   });
 };
 
