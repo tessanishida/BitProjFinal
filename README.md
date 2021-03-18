@@ -15,10 +15,18 @@ Hello! My name is Tessa Nishida, and I am a sophomore studying computer science 
 While helping to tutor young students during the pandemic, I noticed that kids had difficulties staying focused and motivated while learning online. Created WorkSpace to help kids develop good time management skills and help parents better idea of how their child learns. 
 
 **How it Works**
+
 Below is a diagram of the basic structure of the web app...
 
 ![diagram](/pres-diagram.jpg)
 
+Here is a general outline of how to connect the frontend and backend..
+
+1. Create a Azure Static Web App
+2. Call Azure Function from frontend (Remember to use async functions!)
+3. Call the Twilio API in the backend
+
+Done!
 
 **Thank you!**
 
