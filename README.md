@@ -13,7 +13,8 @@ Hello! My name is Tessa Nishida, and I am a sophomore studying computer science 
 While helping to tutor young students during the pandemic, I noticed that kids had difficulties staying focused and motivated while learning online. Created WorkSpace to help kids develop good time management skills and help parents better idea of how their child learns. 
 
 **How it Works**
-\n ![diagram](/pres-diagram.jpg)
+
+![diagram](/pres-diagram.jpg)
 
 
 **Thank you!**
