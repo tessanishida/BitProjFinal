@@ -6,7 +6,7 @@ WorkSpace was built to help young kids stay engaged while learning online. The w
 
 **About Me**
 
-![me](/Tessa.jpg)
+![me](/Tessa.jpg =250x)
 
 Hello! My name is Tessa Nishida, and I am a sophomore studying computer science at the University of Utah. I am originally from Honolulu, HI and I enjoy running, hiking, and traveling!
 
@@ -16,6 +16,7 @@ While helping to tutor young students during the pandemic, I noticed that kids h
 
 **How it Works**
 Below is a diagram of the basic structure of the web app...
+
 ![diagram](/pres-diagram.jpg)
 
 
